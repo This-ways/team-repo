@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>안상우 | About Me</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background: #0a0f1e;
+        color: #e0f0ff;
+        min-height: 100vh;
+      }
+
+      /* 헤더 */
+      header {
+        background: linear-gradient(
+          135deg,
+          #1c86c8 0%,
+          #6acaef 50%,
+          #1c86c8 100%
+        );
+        padding: 60px 20px 50px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.08) 0%,
+          transparent 60%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0a2e52, #1c5fa8);
+        border: 4px solid #fff;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      header h1 {
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      header p.subtitle {
+        margin-top: 8px;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 300;
+        position: relative;
+        z-index: 1;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      /* 메인 */
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 40px 20px 60px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .card {
+        background: #111827;
+        border: 1px solid #1c86c820;
+        border-radius: 16px;
+        padding: 28px 32px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 32px rgba(28, 134, 200, 0.15);
+      }
+
+      .card-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #6acaef;
+        margin-bottom: 18px;
+        border-bottom: 1px solid #1c86c830;
+        padding-bottom: 10px;
+      }
+
+      /* 기본 정보 그리드 */
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .info-item label {
+        display: block;
+        font-size: 0.7rem;
+        color: #6acaef;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .info-item span {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #e0f0ff;
+      }
+
+      /* 스포츠 카드 */
+      .sports-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .sport-badge {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #0d1a2d;
+        border: 1px solid #1c86c840;
+        border-radius: 12px;
+        padding: 14px 20px;
+        flex: 1;
+        min-width: 200px;
+      }
+      .sport-icon {
+        font-size: 2rem;
+      }
+      .sport-info strong {
+        display: block;
+        font-size: 0.95rem;
+        color: #fff;
+        font-weight: 700;
+      }
+      .sport-info small {
+        font-size: 0.75rem;
+        color: #6acaef;
+      }
+
+      /* 상태 배지 */
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #1c86c820, #6acaef20);
+        border: 1px solid #1c86c850;
+        border-radius: 999px;
+        padding: 8px 18px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #6acaef;
+      }
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #6acaef;
+        animation: blink 1.5s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.75rem;
+        color: #334;
+      }
+
+      @media (max-width: 500px) {
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+        header h1 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="avatar">🙋</div>
+      <h1>안상우</h1>
+      <p class="subtitle">Ahn Sang-woo · 2001</p>
+    </header>
+
+    <main>
+      <!-- 기본 정보 -->
+      <div class="card">
+        <div class="card-title">기본 정보</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>이름</label>
+            <span>안상우</span>
+          </div>
+          <div class="info-item">
+            <label>생년월일</label>
+            <span>2001.04.21</span>
+          </div>
+          <div class="info-item">
+            <label>나이</label>
+            <span>26세</span>
+          </div>
+          <div class="info-item">
+            <label>거주지</label>
+            <span>경북 김천</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 현재 상태 -->
+      <div class="card">
+        <div class="card-title">현재 상태</div>
+        <div class="status-badge">
+          <div class="status-dot"></div>
+          취업 준비 중
+        </div>
+      </div>
+
+      <!-- 좋아하는 팀 -->
+      <div class="card">
+        <div class="card-title">내가 좋아하는 팀들</div>
+        <div class="sports-row">
+          <div class="sport-badge">
+            <div class="sport-icon">⚽</div>
+            <div class="sport-info">
+              <strong>Manchester City</strong>
+              <small>Premier League</small>
+            </div>
+          </div>
+          <div class="sport-badge">
+            <div class="sport-icon">⚾</div>
+            <div class="sport-info">
+              <strong>삼성 라이온즈</strong>
+              <small>KBO League</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>© 2026 Ahn Sang-woo</footer>
+  </body>
+</html>
