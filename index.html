@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>29회차 강두형 조</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background: #0a0f1e;
+        color: #e0f0ff;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* 배경 파티클 효과 */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background:
+          radial-gradient(ellipse at 20% 50%, rgba(28, 134, 200, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(106, 202, 239, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 60% 80%, rgba(28, 134, 200, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* 헤더 */
+      header {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 80px 20px 60px;
+        background: linear-gradient(180deg, rgba(28, 134, 200, 0.2) 0%, transparent 100%);
+      }
+
+      .team-badge {
+        display: inline-block;
+        background: rgba(28, 134, 200, 0.2);
+        border: 1px solid rgba(106, 202, 239, 0.4);
+        color: #6acaef;
+        font-size: 13px;
+        padding: 6px 18px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        letter-spacing: 0.1em;
+      }
+
+      header h1 {
+        font-size: clamp(32px, 6vw, 64px);
+        font-weight: 900;
+        background: linear-gradient(135deg, #ffffff 0%, #6acaef 50%, #1c86c8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+
+      header p {
+        font-size: 16px;
+        color: rgba(224, 240, 255, 0.6);
+        font-weight: 300;
+      }
+
+      /* 구분선 */
+      .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #1c86c8, #6acaef);
+        margin: 24px auto 0;
+        border-radius: 2px;
+      }
+
+      /* 팀원 섹션 */
+      main {
+        position: relative;
+        z-index: 1;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 24px 100px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 0.2em;
+        color: #6acaef;
+        text-transform: uppercase;
+        margin-bottom: 48px;
+      }
+
+      .members-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      }
+
+      /* 카드 */
+      .card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(106, 202, 239, 0.15);
+        border-radius: 20px;
+        padding: 36px 32px;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: linear-gradient(135deg, rgba(28, 134, 200, 0.08) 0%, transparent 60%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(106, 202, 239, 0.5);
+        box-shadow: 0 20px 40px rgba(28, 134, 200, 0.2);
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #1c86c8, #6acaef);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+
+      .card-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 4px;
+      }
+
+      .card-role {
+        font-size: 12px;
+        color: #6acaef;
+        letter-spacing: 0.05em;
+      }
+
+      .card-tasks {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .card-tasks li {
+        background: rgba(28, 134, 200, 0.15);
+        border: 1px solid rgba(106, 202, 239, 0.2);
+        color: rgba(224, 240, 255, 0.8);
+        font-size: 12px;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+
+      .card-arrow {
+        position: absolute;
+        bottom: 28px;
+        right: 28px;
+        color: rgba(106, 202, 239, 0.4);
+        font-size: 18px;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .card:hover .card-arrow {
+        transform: translate(4px, -4px);
+        color: #6acaef;
+      }
+
+      /* 푸터 */
+      footer {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 32px;
+        border-top: 1px solid rgba(106, 202, 239, 0.1);
+        color: rgba(224, 240, 255, 0.3);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="team-badge">KB IT's Your Life 29회차</div>
+      <h1>강두형 조</h1>
+      <p>팀원 소개 페이지에 오신 것을 환영합니다</p>
+      <div class="divider"></div>
+    </header>
+
+    <main>
+      <p class="section-title">Team Members</p>
+      <div class="members-grid">
+
+        <a class="card" href="Doohyeong.html">
+          <div class="card-header">
+            <div class="avatar">👤</div>
+            <div>
+              <div class="card-name">강두형</div>
+              <div class="card-role">팀장</div>
+            </div>
+          </div>
+          <ul class="card-tasks">
+            <li>자기소개 페이지 제작</li>
+          </ul>
+          <span class="card-arrow">↗</span>
+        </a>
+
+        <a class="card" href="hyunjun.html">
+          <div class="card-header">
+            <div class="avatar">👤</div>
+            <div>
+              <div class="card-name">고현준</div>
+              <div class="card-role">팀원</div>
+            </div>
+          </div>
+          <ul class="card-tasks">
+            <li>자기소개 페이지 제작</li>
+          </ul>
+          <span class="card-arrow">↗</span>
+        </a>
+
+        <a class="card" href="Sangwoo.html">
+          <div class="card-header">
+            <div class="avatar">👤</div>
+            <div>
+              <div class="card-name">안상우</div>
+              <div class="card-role">팀원</div>
+            </div>
+          </div>
+          <ul class="card-tasks">
+            <li>자기소개 페이지 제작</li>
+          </ul>
+          <span class="card-arrow">↗</span>
+        </a>
+
+        <a class="card" href="my_page.html">
+          <div class="card-header">
+            <div class="avatar">👤</div>
+            <div>
+              <div class="card-name">이성우</div>
+              <div class="card-role">팀원</div>
+            </div>
+          </div>
+          <ul class="card-tasks">
+            <li>자기소개 페이지 제작</li>
+          </ul>
+          <span class="card-arrow">↗</span>
+        </a>
+
+      </div>
+    </main>
+
+    <footer>
+      <p>29회차 강두형 조 &copy; 2026</p>
+    </footer>
+  </body>
+</html>
